@@ -12,9 +12,16 @@ router.get('/', (req, res) => {
 
 // Registration
 router.get('/register', (req, res) => {
-    res.render('register', { warning: null, message: 'Already register?', link: 'login' });
+    res.render('register', { warning: null, message: 'Already registered?', link: 'login' });
 });
 
 router.post('/register', validateRegistration, controller.register);
+
+// Login
+router.get('/login', (req, res) => {
+    res.render('login', { warning: null, message: 'Not registered?', link: 'register' });
+});
+
+router.post('/login', controller.login);
 
 export default router;

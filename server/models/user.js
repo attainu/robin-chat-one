@@ -19,6 +19,15 @@ class User {
             });
         });
     }
+
+    login = (user) => {
+        return new Promise(async (res, rej) => {
+            userSchema.findOne({ email: user.email }, (err, info) => {
+                if(err) rej(err);
+                res(info);
+            });
+        });
+    }
 }
 
 export default new User;
