@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<body>
+    <h2>Welcome to web chat app Registration</h2>
+    <%= warning %>
+    <form action="register", method="POST">
+        <br>
+        <div>
+            <input type="text" name="firstname" id="firstname", placeholder="First name", required>
+            <input type="text" name="lastname" id="lastname", placeholder="Last name">
+        </div>
+        <br>
+        <div>
+            <input type="email" name="email" id="email", placeholder="Email", required>
+            <input type="email" name="confirm_email" id="confirm_email", placeholder="Confirm Email", required>
+        </div>
+        <br>
+        <div>
+            <input type="password" name="password" id="password", placeholder="Password", required>
+            <input type="password" name="confirm_password" id="confirm_password", placeholder="Confirm Password", required>
+            <button type="submit">Register</button>
+        </div>
+        </form>
+    <br>
+    <%= message %> <a href=<%= link %>>Login</a>
+</body>
+</html>
