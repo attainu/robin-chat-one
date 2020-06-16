@@ -2,4 +2,4 @@
 
 ## For test run - npm test
 
-## For production start run - npm start
+## For production run - npm start
