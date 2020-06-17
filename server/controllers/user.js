@@ -1,5 +1,8 @@
+import passport from 'passport';
+
 import User from '../models/user';
 import hash from '../utils/hash';
+import '../services/thirdPartyAuth';
 
 const userController = {
     register: async (req, res) => {
@@ -58,6 +61,24 @@ const userController = {
             req.session.destroy();
             res.clearCookie('connect.sid');
             return res.redirect('/');
+        }
+    },
+
+    loginGoogle: {
+        getUser: passport.authenticate('google', { scope: ['profile', 'email'] }),
+        varify: passport.authenticate('google' , { failureRedirect: '/users/login' }),
+        success: (req, res) => {
+            req.session.user = req.user;
+            res.redirect('/users');
+        }
+    },
+
+    loginFacebook: {
+        getUser: passport.authenticate('facebook', { scope: ['profile', 'email'] }),
+        varify: passport.authenticate('facebook' , { failureRedirect: '/users/login' }),
+        success: (req, res) => {
+            req.session.user = req.user;
+            res.redirect('/users');
         }
     }
 };

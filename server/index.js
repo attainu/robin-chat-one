@@ -7,6 +7,7 @@ import 'dotenv/config';
 import './config/dbConnection';
 
 import userRoute from './routes/user';
+import passport from 'passport';
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.use(session({
 // Middlewares
 app.use(morgan('tiny'));
 app.use(express.urlencoded({ extended: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
 app.use('/users', userRoute);

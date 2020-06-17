@@ -30,6 +30,16 @@ router.get('/login', (req, res) => {
 
 router.post('/login', controller.login);
 
+// O-auth login google
+router.get('/login/google', controller.loginGoogle.getUser);
+
+router.get('/login/google/callback', controller.loginGoogle.varify, controller.loginGoogle.success);
+
+// O-auth login facebook
+router.get('/login/facebook', controller.loginFacebook.getUser);
+
+router.get('/login/facebook/callback', controller.loginFacebook.varify, controller.loginFacebook.success);
+
 // Logout
 router.post('/', controller.logout);
 
