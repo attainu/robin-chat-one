@@ -6,9 +6,16 @@
     <title>Home</title>
 </head>
 <body>
-    <h2>Welcome <%= user %></h2>
-    <form action="user.ejs", method="POST">
-        <button type="submit">Logout</button>
-    </form>
+    <div>
+        <h2>Welcome <%= user %></h2>
+        <form action="/users", method="POST">
+            <button type="submit">Logout</button>
+        </form>
+        <br>
+        <div>
+            <a href="users/rooms">Rooms</a>
+            <a href="users/profile">Profile</a>
+        </div>
+    </div>
 </body>
 </html>

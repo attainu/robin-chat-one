@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
+import session from 'express-session';
 import 'dotenv/config';
 
 import './config/dbConnection';
@@ -12,6 +13,13 @@ const app = express();
 app.listen(process.env.PORT || 3000, () => {
     console.log(`Server is running on port ${process.env.PORT || 3000}`);
 });
+
+// Session
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}));
 
 // Middlewares
 app.use(morgan('tiny'));
@@ -26,7 +34,7 @@ app.set('view engine', 'ejs');
 
 // Homepage
 app.get('/', (req, res) => {
-    res.send('<h1>Welcome</h1>');
+    res.status(200).render('homepage');
 });
 
 // Invalid path handler

@@ -8,12 +8,18 @@
 <body>
     <h2>Welcome to web chat app Login</h2>
     <%= warning %>
-    <form action="login", method="POST">
+    <form action="/users/login", method="POST">
         <br>
         <div>
             <input type="email" name="email" id="email", placeholder="Email", required>
             <input type="password" name="password" id="password", placeholder="Password", required>
             <button type="submit">Login</button>
+        </div>
+        <br>
+        <div>
+            Login using - 
+            <a href="login/facebook">Facebook</a>
+            <a href="login/google">Google</a>
         </div>
     </form>
     <br>

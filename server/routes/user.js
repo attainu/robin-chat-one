@@ -7,21 +7,30 @@ const router = express.Router();
 
 // User home
 router.get('/', (req, res) => {
-    res.render('user', { user: null });
+    if(!req.session.user) {
+        return res.redirect('/users/login');
+    }
+    res.render('user', { user: req.session.user.firstname });  
 });
 
 // Registration
 router.get('/register', (req, res) => {
-    res.render('register', { warning: null, message: 'Already registered?', link: 'login' });
+    res.render('register', { warning: null, message: 'Already registered?', link: '/users/login' });
 });
 
 router.post('/register', validateRegistration, controller.register);
 
 // Login
 router.get('/login', (req, res) => {
-    res.render('login', { warning: null, message: 'Not registered?', link: 'register' });
+    if(!req.session.user) {
+        return res.render('login', { warning: null, message: 'Not registered?', link: '/users/register' });
+    }
+    res.redirect('/users');
 });
 
 router.post('/login', controller.login);
+
+// Logout
+router.post('/', controller.logout);
 
 export default router;

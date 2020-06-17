@@ -9,7 +9,7 @@ const userController = {
                 {   
                     warning: null,
                     message: 'Registration successful',
-                    link: 'login'
+                    link: '/users/login'
                 }
             );
         } catch (errors) {
@@ -17,7 +17,7 @@ const userController = {
                 {   
                     warning: errors,
                     message: 'Already registered?', 
-                    link: 'login'
+                    link: '/users/login'
                 }
             );
         }
@@ -31,24 +31,33 @@ const userController = {
                     {   
                         warning: 'Email does not exist!',
                         message: 'Not registered?',
-                        link: 'register'
+                        link: '/users/register'
                     }
                 )
             }
             if(await hash.comparePassword(req.body.password, user.password)) {
+                req.session.user = user;
                 return res.redirect('/users');
             } else {
                 return res.status(403).render('login', 
                     {
                         warning: 'Password incorrect!',
                         message: 'Not registered?',
-                        link: 'register'
+                        link: '/users/register'
                     }
                 )
             }
         } catch (error) {
             console.log(error);
             return res.status(403).send('<h3>Login faild!<h3>');
+        }
+    },
+
+    logout: (req, res) => {
+        if(req.session.user) {
+            req.session.destroy();
+            res.clearCookie('connect.sid');
+            return res.redirect('/');
         }
     }
 };
