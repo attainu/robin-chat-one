@@ -14,7 +14,7 @@ const register = [
         .withMessage('First name should not contains more than 50 characters'),
 
     check('lastname')
-        .if(body('last_name').exists({ checkFalsy: true }))
+        .if(body('lastname').exists({ checkFalsy: true }))
         .isAlpha().bail()
         .withMessage('Last name should contains only alphabets(a-z, A-Z)')
         .isLength({ min: 3 }).bail()
@@ -55,16 +55,14 @@ const register = [
             throw new Error('Password confirmation does not match password');
             return true;
         }),
-    
+
     (req, res, next) => {
         const errors = validationResult(req);
-        if(!errors.isEmpty()) 
-        return res.status(400).render('register', {
-            warning: errors.errors[0].msg,
-            message: 'Already register?', 
-            link: 'login'
-        });
-        return next()
+        if(!errors.isEmpty()) {
+            req.flash('info', errors.errors[0].msg);
+            return res.redirect('/users/register');
+        }
+        return next();
     }
 ]
 

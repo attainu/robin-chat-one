@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= user.firstname %> <%= user.lastname %></title>
+</head>
+<body>
+    <h2>My Profile</h2>
+    <% if(message.info) { %>
+        <%= message.info %>
+        <br><br>
+    <% } %>
+    <div>
+        Name: <%= user.firstname %> <%= user.lastname %>
+        <br>Email: <%= user.email %>
+        <br>Nickname: <%= user.nickname %>
+        <br>Phone: <%= user.phone %>
+        <br>Country: <%= user.country %>
+        <br><br>
+        <a href="/users">Home</a>
+        <a href="/users/profile/edit">Edit</a>
+        <% if(!user.nickname) { %>
+            <br><br>
+            * Nickname is required for joining chat room
+        <% } %>
+    </div>
+</body>
+</html>

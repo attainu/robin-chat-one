@@ -7,14 +7,19 @@
 </head>
 <body>
     <div>
-        <h2>Welcome <%= user %></h2>
+        <h2>Welcome <%= user.firstname %></h2>
+        <% if(message.success) { %> 
+            <%= message.success %>
+            <br><br>
+        <% } %>
         <form action="/users", method="POST">
             <button type="submit">Logout</button>
         </form>
         <br>
         <div>
-            <a href="users/rooms">Rooms</a>
-            <a href="users/profile">Profile</a>
+            <a href="/">Homepage</a>
+            <a href="/users/rooms">Rooms</a>
+            <a href="/users/profile">Profile</a>
         </div>
     </div>
 </body>

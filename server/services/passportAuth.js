@@ -1,6 +1,7 @@
 import passport from 'passport';
 import GoogleStrategy from 'passport-google-oauth20/lib/strategy';
 import FacebookStrategy from 'passport-facebook/lib/strategy';
+import LocalStrategy from 'passport-local/lib/strategy';
 import 'dotenv/config';
 
 import User from '../schemas/user';
@@ -15,6 +16,27 @@ passport.deserializeUser((userId, done) => {
         done(null, user);
     });
 });
+
+// Local strategy
+passport.use(new LocalStrategy({
+    usernameField: 'email'
+}, 
+(email, password, done) => {
+    User.findOne({ email: email }, (err, info) => {
+        if (err) { 
+            return done(err); 
+        }
+        if (!info) { 
+            return done(null, false); 
+        }
+        new Promise(async () => {
+            if(!await hash.comparePassword(password, info.password)) {
+                return done(null, false);
+            }
+        })
+        return done(null, info);
+    });
+}));
 
 // Google strategy
 passport.use(new GoogleStrategy({

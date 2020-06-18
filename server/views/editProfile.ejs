@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= user.firstname %> <%= user.lastname %></title>
+</head>
+<body>
+    <h2>Edit Profile</h2>
+    <% if(message.info) { %>
+        <%= message.info %>
+        <br><br>
+    <% } %>
+    <div>
+        Email: <%= user.email %>
+        <form action="/users/profile/edit?_method=PATCH", method="POST">
+            <div>
+                <br>
+                <input type="text" name="firstname" id="firstname", placeholder="First name">
+                <input type="text" name="lastname" id="lastname", placeholder="Last name">
+            </div>
+            <br>
+            <div>
+                <input type="password" name="password" id="password", placeholder="Password">
+                <input type="password" name="confirm_password" id="confirm_password", placeholder="Confirm Password">
+            </div>
+            <br>
+            <div>
+                <input type="text" name="nickname" id="nickname", placeholder="Nickname">
+                <input type="text" name="phone" id="phone", placeholder="Phone">
+            </div>
+            <br>
+            <div>
+                <input type="text" name="country" id="country", placeholder="Country">
+                <button type="submit">Save</button>
+                <button type="reset">Reset</button>
+            </div>            
+            <br>
+                <a href="/users">Home</a> <a href="/users/profile">Back</a>
+            </form>
+            <br>
+        </form>
+        <form action="/users/profile/delete?_method=DELETE", method="POST">
+            <button>Delete Account</button>
+        </form>
+    </div>
+</body>
+</html>

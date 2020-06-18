@@ -2,11 +2,13 @@ import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
 import session from 'express-session';
+import methodOverride from 'method-override';
 import 'dotenv/config';
 
 import './config/dbConnection';
 
 import userRoute from './routes/user';
+import profileRoute from './routes/profile';
 import passport from 'passport';
 
 const app = express();
@@ -27,9 +29,11 @@ app.use(morgan('tiny'));
 app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 // Routes
 app.use('/users', userRoute);
+app.use('/users/profile', profileRoute);
 
 // Views
 app.set('views', path.join(__dirname, 'views'));

@@ -6,10 +6,15 @@
     <title>Login</title>
 </head>
 <body>
-    <h2>Welcome to web chat app Login</h2>
-    <%= warning %>
+    <h2>Welcome to Chat One Login</h2>
+    <% if(message.error) { %> 
+        <%= message.error %>
+        <br><br>
+    <% } else if (message.info) { %>
+        <%= message.info %>
+        <br><br>
+    <% } %>
     <form action="/users/login", method="POST">
-        <br>
         <div>
             <input type="email" name="email" id="email", placeholder="Email", required>
             <input type="password" name="password" id="password", placeholder="Password", required>
@@ -18,11 +23,11 @@
         <br>
         <div>
             Login using - 
-            <a href="login/facebook">Facebook</a>
-            <a href="login/google">Google</a>
+            <a href="/users/login/facebook">Facebook</a>
+            <a href="/users/login/google">Google</a>
         </div>
     </form>
     <br>
-    <%= message %> <a href=<%= link %>>Register</a>
+    Not registered? <a href="/users/register">Register</a>
 </body>
 </html>
