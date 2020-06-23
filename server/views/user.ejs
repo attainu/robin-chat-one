@@ -3,23 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
     <title>Home</title>
 </head>
 <body>
-    <div>
-        <h2>Welcome <%= user.firstname %></h2>
-        <% if(message.success) { %> 
-            <%= message.success %>
-            <br><br>
-        <% } %>
-        <form action="/users", method="POST">
-            <button type="submit">Logout</button>
-        </form>
-        <br>
-        <div>
-            <a href="/">Homepage</a>
-            <a href="/users/rooms">Rooms</a>
-            <a href="/users/profile">Profile</a>
+    <div class="centered-form">
+        <div class="centered-form__box">
+            <h2>Welcome <%= user.firstname %></h2>
+            <% if(message.success) { %> 
+                <%= message.success %>
+                <br><br>
+            <% } %>
+            <form action="/users", method="POST">
+                <button type="submit">Logout</button>
+            </form>
+            <br>
+            <div>
+                <a class="link" href="/">Homepage</a>
+                <a class="link" href="/users/rooms">Rooms</a>
+                <a class="link" href="/users/profile">Profile</a>
+            </div>
         </div>
     </div>
 </body>

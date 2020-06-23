@@ -3,31 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
     <title>Login</title>
 </head>
 <body>
-    <h2>Welcome to Chat One Login</h2>
-    <% if(message.error) { %> 
-        <%= message.error %>
-        <br><br>
-    <% } else if (message.info) { %>
-        <%= message.info %>
-        <br><br>
-    <% } %>
-    <form action="/users/login", method="POST">
-        <div>
-            <input type="email" name="email" id="email", placeholder="Email", required>
-            <input type="password" name="password" id="password", placeholder="Password", required>
-            <button type="submit">Login</button>
-        </div>
-        <br>
-        <div>
-            Login using - 
-            <a href="/users/login/facebook">Facebook</a>
-            <a href="/users/login/google">Google</a>
-        </div>
-    </form>
-    <br>
-    Not registered? <a href="/users/register">Register</a>
+    <div class="centered-form">
+        <div class="centered-form__box">
+            <h2>Login to Chat One!</h2>
+            <% if(message.error) { %> 
+                <%= message.error %>
+                <br><br>
+            <% } else if (message.info) { %>
+                <%= message.info %>
+                <br><br>
+            <% } %>
+            <form action="/users/login", method="POST">
+                <div>
+                    <input type="email" name="email" id="email", placeholder="Email", required>
+                    <input type="password" name="password" id="password", placeholder="Password", required>
+                    <button type="submit">Login</button>
+                </div>
+                <br>
+                <div>
+                    Login using - 
+                    <a class="fb" href="/users/login/facebook">Facebook</a>
+                    <a class="google" href="/users/login/google">Google</a>
+                </div>
+            </form>
+            <br>
+            Not registered? <a href="/users/register">Register</a>
+    </div>
+    </div>
 </body>
 </html>

@@ -15,18 +15,17 @@ class Profile {
 
     update = (sessionUser, editedUser) => {
         return new Promise(async (res, rej) => {
-            const user = {
-                firstname: editedUser.firstname || sessionUser.firstname,
+            userSchema.updateOne({ _id: sessionUser._id }, { 
+                usfirstname: editedUser.firstname || sessionUser.firstname,
                 lastname: editedUser.lastname || sessionUser.lastname,
                 email: sessionUser.email,
-                nickname: editedUser.nickname || sessionUser.nickname,
+                username: editedUser.username || sessionUser.username,
                 password: await hash.hashPassword(editedUser.password) || sessionUser.password,
                 phone: editedUser.phone || sessionUser.phone,
-                country: editedUser.country || sessionUser.country
-            }
-            userSchema.updateOne({ _id: user._id }, { user }, (err, info) => {
+                country: editedUser.country || sessionUser.countryer 
+            }, (err, info) => {
                 if(err) rej(err);
-                res(user);
+                res(info);
             });
         });
     }

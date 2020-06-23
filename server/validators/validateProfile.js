@@ -36,18 +36,18 @@ const profile = [
             return true;
         }),
 
-    check('nickname')
-        .if(body('nickname').exists({ checkFalsy: true }))
+    check('username')
+        .if(body('username').exists({ checkFalsy: true }))
         .isAlphanumeric().bail()
-        .withMessage('Nickname should contains only alpha-numeric characters (a-z, A-Z, 0-9)')
+        .withMessage('Username should contains only alpha-numeric characters (a-z, A-Z, 0-9)')
         .isLength({ min: 3 }).bail()
-        .withMessage('Nickname should contains at least 3 characters')
+        .withMessage('Username should contains at least 3 characters')
         .isLength({ max: 25 }).bail()
-        .withMessage('Nickname should not contains more than 25 characters'),
-    body('nickname')
+        .withMessage('Username should not contains more than 25 characters'),
+    body('username')
         .custom(value => {
-            return User.findOne({ nickname: value }).then(user => {
-                if(user) return Promise.reject('Nickname already taken!');
+            return User.findOne({ username: value }).then(user => {
+                if(user) return Promise.reject('Username already taken!');
             });
         }),
         

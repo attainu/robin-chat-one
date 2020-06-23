@@ -3,27 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
     <title><%= user.firstname %> <%= user.lastname %></title>
 </head>
 <body>
-    <h2>My Profile</h2>
-    <% if(message.info) { %>
-        <%= message.info %>
-        <br><br>
-    <% } %>
-    <div>
-        Name: <%= user.firstname %> <%= user.lastname %>
-        <br>Email: <%= user.email %>
-        <br>Nickname: <%= user.nickname %>
-        <br>Phone: <%= user.phone %>
-        <br>Country: <%= user.country %>
-        <br><br>
-        <a href="/users">Home</a>
-        <a href="/users/profile/edit">Edit</a>
-        <% if(!user.nickname) { %>
-            <br><br>
-            * Nickname is required for joining chat room
-        <% } %>
+    <div class="centered-form">
+        <div class="centered-form__box">
+            <h2>My Profile</h2>
+            <% if(message.info) { %>
+                <%= message.info %>
+                <br><br>
+            <% } %>
+            <div>
+                <h4>
+                    Name: <%= user.firstname %> <%= user.lastname %>
+                    <br>Email: <%= user.email %>
+                    <br>Username: <%= user.username %>
+                    <br>Phone: <%= user.phone %>
+                    <br>Country: <%= user.country %>
+                </h4>
+                <br><br>
+                <a class="link" href="/users">Home</a>
+                <a class="link" href="/users/profile/edit">Edit</a>
+                <% if(!user.username) { %>
+                    <br><br>
+                    * Username is required for joining chat room
+                <% } %>
+            </div>
+        </div>
     </div>
 </body>
 </html>

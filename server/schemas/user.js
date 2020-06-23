@@ -11,13 +11,15 @@ const user = new mongoose.Schema({
 
     lastname: {
         type: String,
+        default: null,
         min: 3,
         max: 50,
         trim: true
     },
 
-    nickname: {
+    username: {
         type: String,
+        default: null,
         min: 3,
         max: 50,
         trim: true,
@@ -40,11 +42,16 @@ const user = new mongoose.Schema({
 
     phone: {
         type: String,
+        default: null,
+        min: 6,
         max: 10
     },
 
     country: {
-        type: String
+        type: String,
+        default: null,
+        min: 3,
+        max: 50
     }
 },
     {

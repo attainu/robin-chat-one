@@ -1,24 +1,28 @@
+import path from 'path';
+import http from 'http';
+
 import express from 'express';
 import morgan from 'morgan';
-import path from 'path';
-import session from 'express-session';
+import expressSession from 'express-session';
 import methodOverride from 'method-override';
+import passport from 'passport';
 import 'dotenv/config';
 
 import './config/dbConnection';
 
 import userRoute from './routes/user';
 import profileRoute from './routes/profile';
-import passport from 'passport';
 
 const app = express();
+const port = process.env.PORT || 3000;
+const server = http.createServer(app);
 
-app.listen(process.env.PORT || 3000, () => {
-    console.log(`Server is running on port ${process.env.PORT || 3000}`);
+server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
 
 // Session
-app.use(session({
+const session = (expressSession({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
@@ -30,14 +34,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
+app.use(session);
 
 // Routes
 app.use('/users', userRoute);
 app.use('/users/profile', profileRoute);
 
-// Views
+// Views & statics
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Homepage
 app.get('/', (req, res) => {

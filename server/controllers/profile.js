@@ -13,10 +13,13 @@ const profileController = {
 
     update: async(req, res) => {
         try {
-            const user = await Profile.update(req.session.user, req.body)
-            req.session.user = user;
-            req.flash('info', 'Profile updated!');
-            return res.redirect('/users/profile');
+            const info = await Profile.update(req.session.user, req.body)
+            if(info.n === info.ok) {
+                const user = await Profile.getUser(req.session.user);
+                req.session.user = user;
+                req.flash('info', 'Profile updated!');
+                return res.redirect('/users/profile');
+            }
         } catch(errors) {
             req.flash('info', errors);
             return res.redirect('/users/profile/edit');
