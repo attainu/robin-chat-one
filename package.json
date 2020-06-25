@@ -42,9 +42,11 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/runtime": "^7.10.2",
     "babel-watch": "^7.0.0",
+    "cloudinary": "^1.22.0",
     "dotenv": "^8.2.0",
     "method-override": "^3.0.0",
     "morgan": "^1.10.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "socketio-file-upload": "^0.7.2"
   }
 }

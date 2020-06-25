@@ -13,7 +13,10 @@ const chat = new mongoose.Schema({
 
     text: {
         type: String,
-        required: true
+    },
+
+    url: {
+        type: String
     }
 },
     {

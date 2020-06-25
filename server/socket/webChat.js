@@ -1,12 +1,21 @@
-import Filter from 'bad-words';
+import fs from 'fs';
+import path from 'path';
 
-import { generateMessage, generateLocationMessage } from '../utils/messages';
+import Filter from 'bad-words';
+import SocketIOFileUpload from 'socketio-file-upload';
+
+import { generateMessage, generateLocationMessage, generateFileShareMessage } from '../utils/messages';
 import { addUser, removeUser, getUser, getUsersInRoom } from '../utils/users';
 import Chat from '../schemas/chat';
+import cloudUploader from '../services/cloudinary';
 import io from '../index';
 
 export default (socket) => {
     console.log('New WebSocket connection')
+
+    const uploader = new SocketIOFileUpload()
+    uploader.dir = path.join(__dirname, '../../public/uploads')
+    uploader.listen(socket)
 
     socket.on('join', (options, callback) => {
         const { error, user } = addUser({ 
@@ -44,7 +53,11 @@ export default (socket) => {
             return callback('Profanity is not allowed!')
         }
 
-        const chat = generateMessage(user.username, message);
+        if (user === undefined) {
+            return callback({ error: 'Please login again!' });
+        }
+
+        const chat = generateMessage(user.username, message);        
         
         io.to(user.room).emit('message', chat)
 
@@ -58,9 +71,46 @@ export default (socket) => {
 
     socket.on('sendLocation', (coords, callback) => {
         const user = getUser(socket.id)
-        io.to(user.room).emit('locationMessage', generateLocationMessage(user.username, `https://google.com/maps?q=${coords.latitude},${coords.longitude}`))
+
+        if (user === undefined) {
+            return callback({ error: 'Please login again!' });
+        }
+
+        const chat = generateLocationMessage(user.username, `https://google.com/maps?q=${coords.latitude},${coords.longitude}`);
+
+        io.to(user.room).emit('locationMessage', chat)
+
+        chat.room = user.room;
+        Chat.create(chat).then(() => {
+            console.log('success')
+        }).catch(error => console.log('failure', error));
+
         callback()
     })
+
+    uploader.on("saved", async event => {
+        const user = getUser(socket.id)
+        
+        if (user === undefined) {
+            socket.on('shareFile', (success, callback) => {
+                return callback({ error: 'Please login again!' })
+            });
+            return;
+        }
+
+        const cloud = await cloudUploader(event.file.pathName);
+
+        fs.unlinkSync(event.file.pathName);
+
+        const chat = generateFileShareMessage(user.username, `${cloud.url}`);
+
+        io.to(user.room).emit('fileShareMessage', chat)
+
+        chat.room = user.room;
+        Chat.create(chat).then(() => {
+            console.log('success')
+        }).catch(error => console.log('failure', error));
+    });
 
     socket.on('disconnect', () => {
         const user = removeUser(socket.id)

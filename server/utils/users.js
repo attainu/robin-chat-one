@@ -1,6 +1,13 @@
 const users = []
 
 const addUser = ({ id, username, room }) => {
+    // Check for empty value
+    if(username === undefined) {
+        return {
+            error: 'Username and room are required!'
+        }
+    }
+    
     // Clean the data
     username = username.trim().toLowerCase()
     room = room.trim().toLowerCase()

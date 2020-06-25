@@ -8,6 +8,7 @@ import methodOverride from 'method-override';
 import passport from 'passport';
 import socketIO from 'socket.io';
 import sharedSession from 'express-socket.io-session';
+import SocketIOFileUpload from 'socketio-file-upload';
 import 'dotenv/config';
 
 import './config/dbConnection';
@@ -16,8 +17,6 @@ import socket from './socket/webChat';
 import userRoute from './routes/user';
 import profileRoute from './routes/profile';
 import roomRoute from './routes/room';
-import { cookie } from 'express-validator';
-import flash from 'express-flash';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -41,6 +40,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 app.use(session);
+app.use(SocketIOFileUpload.router);
 
 // Routes
 app.use('/users', userRoute);

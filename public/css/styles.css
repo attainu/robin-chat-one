@@ -217,7 +217,6 @@ button:disabled {
 .compose form {
     display: flex;
     flex-grow: 1;
-    margin-right: 16px;
 }
 
 .compose input {
@@ -230,6 +229,7 @@ button:disabled {
 
 .compose button {
     font-size: 14px;
+    margin-right: 16px;
 }
 
 /* Chat Sidebar Styles */
