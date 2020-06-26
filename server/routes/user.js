@@ -23,6 +23,9 @@ router.get('/register', (req, res) => {
 
 router.post('/register', validateRegistration, controller.register);
 
+// Verification
+router.get('/confirmation/:token', controller.verify);
+
 // Local login
 router.get('/login', (req, res) => {
     if(!req.session.user) {

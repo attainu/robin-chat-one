@@ -11,7 +11,6 @@ const user = new mongoose.Schema({
 
     lastname: {
         type: String,
-        default: null,
         min: 3,
         max: 50,
         trim: true
@@ -19,11 +18,10 @@ const user = new mongoose.Schema({
 
     username: {
         type: String,
-        default: null,
         min: 3,
         max: 50,
         trim: true,
-        unique: true
+        lowercase: true
     },
 
     email: {
@@ -42,16 +40,19 @@ const user = new mongoose.Schema({
 
     phone: {
         type: String,
-        default: null,
         min: 6,
         max: 10
     },
 
     country: {
         type: String,
-        default: null,
         min: 3,
         max: 50
+    },
+
+    isVerified:{
+        type: Boolean,
+        default: false
     }
 },
     {

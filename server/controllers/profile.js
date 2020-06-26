@@ -1,4 +1,5 @@
 import Profile from '../models/profile';
+import { sendAccountClosingEmail, sendProfileUpdateEmail } from '../email/account'
 
 const profileController = {
     getUser: async(req, res) => {
@@ -16,6 +17,7 @@ const profileController = {
             const info = await Profile.update(req.session.user, req.body)
             if(info.n === info.ok) {
                 const user = await Profile.getUser(req.session.user);
+                sendProfileUpdateEmail(user.email, user.firstname);
                 req.session.user = user;
                 req.flash('info', 'Profile updated!');
                 return res.redirect('/users/profile');
@@ -28,7 +30,8 @@ const profileController = {
 
     delete: async(req, res) => {
         try {
-            const info = await Profile.delete(req.session.user);
+            await Profile.delete(req.session.user);
+            sendAccountClosingEmail(req.session.user.email, req.session.user.firstname);
             req.session.destroy();
             res.clearCookie('connect.sid');
             return res.redirect('/');
