@@ -27,7 +27,7 @@ const sendVerificationEmail = (email, url) => {
         to: email,
         from: process.env.EMAIL_ID,
         subject: 'Email verifcation',
-        html: `Hi! Please click on the following link to continue <a href = "${url}">${url}</a>`
+        html: `Hi! Please click on the following link to continue <a href = "${url}">Click here</a>`
     });
     console.log('Verification email sent');
 }

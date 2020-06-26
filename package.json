@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "babel-watch ./server/index",
-    "build": "rimraf dist/ && babel ./server --out-dir dist/server --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+    "build": "rimraf dist/ && babel ./ --out-dir dist/server --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "start": "npm run build && node dist/server/index"
   },
   "repository": {
