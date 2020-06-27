@@ -20,9 +20,20 @@ class Profile {
                 lastname: editedUser.lastname || sessionUser.lastname,
                 email: sessionUser.email,
                 username: editedUser.username || sessionUser.username,
-                password: await hash.hashPassword(editedUser.password) || sessionUser.password,
                 phone: editedUser.phone || sessionUser.phone,
-                country: editedUser.country || sessionUser.countryer 
+                country: editedUser.country || sessionUser.country
+            }, (err, info) => {
+                if(err) rej(err);
+                res(info);
+            });
+        });
+    }
+
+    updatePassword = (sessionUser, editedUser) => {
+        return new Promise(async (res, rej) => {
+            userSchema.updateOne({ _id: sessionUser._id }, { 
+                email: sessionUser.email,
+                password: await hash.hashPassword(editedUser.password),
             }, (err, info) => {
                 if(err) rej(err);
                 res(info);

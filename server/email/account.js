@@ -7,7 +7,7 @@ const sendWelcomeEmail = (email, name) => {
         to: email,
         from: process.env.EMAIL_ID,
         subject: 'Welcome to Chat One!',
-        text: `Welcome ${name}! Thanks for joining Chat One. Let me know how you get along with the app.`
+        text: `Welcome ${name}! Thanks for joining Chat One. Let us know how you get along with the app.`
     });
     console.log('Welcome email sent');
 }
@@ -42,9 +42,20 @@ const sendProfileUpdateEmail = (email, name) => {
     console.log('Profile update email sent');
 }
 
+const sendPasswordChangeEmail = (email, name) => {
+    sgMail.send({
+        to: email,
+        from: process.env.EMAIL_ID,
+        subject: 'Password changed!',
+        html: `Hello ${name}! Your account password changed successfully!`
+    });
+    console.log('Password change email sent');
+}
+
 module.exports = {
     sendWelcomeEmail,
     sendAccountClosingEmail,
     sendVerificationEmail,
-    sendProfileUpdateEmail
+    sendProfileUpdateEmail,
+    sendPasswordChangeEmail
 }

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "babel-watch ./server/index",
-    "build": "rimraf dist/ && babel ./ --out-dir dist/server --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
+    "build": "rimraf dist/ && babel ./server -d dist/server --copy-files && babel ./public -d dist/public --copy-files && babel ./.gitignore ./package.json -d dist/ --copy-files",
     "start": "npm run build && node dist/server/index"
   },
   "repository": {
@@ -32,9 +32,7 @@
     "passport-facebook": "^3.0.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
-    "socket.io": "^2.3.0"
-  },
-  "devDependencies": {
+    "socket.io": "^2.3.0",
     "@babel/cli": "^7.10.1",
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
@@ -42,13 +40,15 @@
     "@babel/preset-env": "^7.10.2",
     "@babel/runtime": "^7.10.2",
     "@sendgrid/mail": "^7.2.1",
-    "babel-watch": "^7.0.0",
     "cloudinary": "^1.22.0",
     "dotenv": "^8.2.0",
     "jsonwebtoken": "^8.5.1",
     "method-override": "^3.0.0",
-    "morgan": "^1.10.0",
     "rimraf": "^3.0.2",
-    "socketio-file-upload": "^0.7.2"
+    "socketio-file-upload": "^0.7.2",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "babel-watch": "^7.0.0"
   }
 }

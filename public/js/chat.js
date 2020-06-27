@@ -48,7 +48,8 @@ socket.on('old-message', (info) => {
         for (let i = n - 1; i > n - 10; i--) {
             chatList.push({
                 username: info[i].username,
-                message: info[i].text || info[i].url,
+                text: info[i].text,
+                url: info[i].url,
                 createdAt: moment(info[i].createdAt).format('h:mm a')
             })
         }
@@ -59,7 +60,8 @@ socket.on('old-message', (info) => {
         for (let chat of info) {
             chatList.push({
                 username: chat.username,
-                message: chat.text || chat.url,
+                text: chat.text,
+                url: chat.url,
                 createdAt: moment(chat.createdAt).format('h:mm a')
             })
         }

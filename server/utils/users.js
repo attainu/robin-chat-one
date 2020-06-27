@@ -2,7 +2,7 @@ const users = []
 
 const addUser = ({ id, username, room }) => {
     // Check for empty value
-    if(username === undefined) {
+    if(username === undefined || room === undefined) {
         return {
             error: 'Username and room are required!'
         }

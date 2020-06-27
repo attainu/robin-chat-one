@@ -1,5 +1,5 @@
 import Profile from '../models/profile';
-import { sendAccountClosingEmail, sendProfileUpdateEmail } from '../email/account'
+import { sendAccountClosingEmail, sendProfileUpdateEmail, sendPasswordChangeEmail } from '../email/account'
 
 const profileController = {
     getUser: async(req, res) => {
@@ -25,6 +25,22 @@ const profileController = {
         } catch(errors) {
             req.flash('info', errors);
             return res.redirect('/users/profile/edit');
+        }  
+    },
+
+    updatePassword: async(req, res) => {
+        try {
+            const info = await Profile.updatePassword(req.session.user, req.body)
+            if(info.n === info.ok) {
+                const user = await Profile.getUser(req.session.user);
+                sendPasswordChangeEmail(user.email, user.firstname);
+                req.session.user = user;
+                req.flash('info', 'Password changed!');
+                return res.redirect('/users/profile');
+            }
+        } catch(errors) {
+            req.flash('info', errors);
+            return res.redirect('/users/profile/password');
         }  
     },
 

@@ -14,7 +14,7 @@ const userController = {
                 jwt.sign({ _id: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' }, 
                 (err, emailToken)=>{
                     if(err) return console.log(err);
-                    const url = `http://localhost:3000/users/confirmation/${emailToken}`;
+                    const url = path.join(`http://localhost:3000/users/confirmation/${emailToken}`);
                     sendVerificationEmail(user.email, url);
                 });
                 req.flash('info', `Verification email sent to (${user.email}). Please verify your email account!`);

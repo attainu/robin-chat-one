@@ -52,7 +52,7 @@ passport.use(new GoogleStrategy({
     User.findOne({ email: profile._json.email }).then(existingUser => {
         if(existingUser) {
             return new Promise(async () => {
-                if(await hash.comparePassword(profile._json.id, existingUser.password)) {
+                if(await hash.comparePassword(profile._json.sub, existingUser.password)) {
                     return done(null, existingUser);
                 } else {
                     return done(null, false);
