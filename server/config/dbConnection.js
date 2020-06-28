@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-mongoose.connect(process.env.MONGODB_CONNECT_LOCAL,
+mongoose.connect(process.env.MONGODB_CONNECT_ATLAS,
     {
         useCreateIndex: true,
         useFindAndModify: true,

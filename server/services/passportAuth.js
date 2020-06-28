@@ -81,7 +81,7 @@ passport.use(new GoogleStrategy({
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: '/users/login/facebook/callback',
+    callbackURL: `${process.env.DOMAIN_NAME}/users/login/facebook/callback`,
     profileFields: ['name', 'emails']
 },
 (accessToken, refreshToken, profile, done) => {
