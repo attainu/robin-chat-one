@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/favicon.png">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>Add Username</title>
+</head>
+<body>
+    <div class="centered-form">
+        <div class="centered-form__box">
+            <h2>Add Username</h2>
+            <% if(message.info) { %>
+                <%= message.info %>
+                <br><br>
+            <% } %>
+            <h4>Email: <%= user.email %></h4>
+            <form action="/users/rooms/addUsername?_method=PATCH", method="POST">
+                <input type="text" name="username" id="username", placeholder="Username", required>
+                <button type="submit">Save</button>
+            </form>
+            <br>
+            <a class="link" href="/users">Home</a> <a class="link" href="/users/profile">Profile</a>
+        </div>
+    </div>
+</body>
+</html>

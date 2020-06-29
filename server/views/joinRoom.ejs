@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chat App</title>
+        <link rel="icon" href="/img/favicon.png">
+        <link rel="stylesheet" href="/css/styles.css">
+    </head>
+    <body>
+        <div class="centered-form">
+            <div class="centered-form__box">
+                <h1>Join</h1>
+                <% if(message.error) { %> 
+                    <%= message.error %>
+                    <br><br>
+                <% } else if (message.info) { %>
+                    <%= message.info %>
+                    <br><br>
+                <% } %>
+                <form action="/users/rooms/chat">
+                    <label>Display name</label>
+                    <% if(username) { %>
+                        <h4><%= username %></h4>
+                    <% } else { %>
+                        <a class="link" href="/users/rooms/addUsername">Add username</a>
+                        <br><br>
+                    <% } %>
+                    <label>Room</label>
+                    <input type="text" name="room" placeholder="Room" required>
+                    <button>Join</button>
+                </form>
+                <br>
+                <a class="link" href="/users">Home</a>
+            </div>
+        </div>
+    </body>
+</html>
