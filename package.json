@@ -42,7 +42,7 @@
     "@sendgrid/mail": "^7.2.1",
     "cloudinary": "^1.22.0",
     "dotenv": "^8.2.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "method-override": "^3.0.0",
     "rimraf": "^3.0.2",
     "socketio-file-upload": "^0.7.2",
